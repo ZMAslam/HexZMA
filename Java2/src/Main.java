@@ -4,7 +4,7 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
 
-// Started 14:45 EST | Completed 15:40 EST
+// Started 14:45 EST | Completed 15:45 EST
 
 public class Main {
     public static void main(String[] args) {
