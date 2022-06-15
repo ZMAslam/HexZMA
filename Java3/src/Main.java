@@ -1,4 +1,7 @@
 import java.util.*;
+import java.util.function.BiConsumer;
+import java.util.function.Consumer;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 // Started 15:45 | 16:35
@@ -6,21 +9,21 @@ import java.util.stream.Collectors;
 public class Main {
     public static void main(String[] args) {
         // Question 1
-        List<Integer> inputList1 = Arrays.asList(5, 13, 4, 21, 13, 27, 2, 59, 59, 34);
-        System.out.println(inputList1.stream().filter(e -> Collections.frequency(inputList1, e) > 1).collect(Collectors.toSet()));
-
-        // Question 2
-        List<Integer> inputList2 = Arrays.asList(4,5,7,8,99,100,101,33,32,4,4);
-        System.out.println(inputList2.stream().distinct().collect(Collectors.toList()));
-
-        // Question 3
-        List<Integer> inputList3 = Arrays.asList(3,90,350,5);
-        System.out.println(inputList3.stream().max(Comparator.comparing(Integer::valueOf)).orElse(0));
-
-        // Question 4
-        List<Integer> inputList4 = Arrays.asList(6, 8, 3, 5, 1, 9);
-        System.out.println(inputList4.stream().max(Comparator.comparing(Integer::valueOf)).orElse(0));
-        System.out.println(inputList4.stream().min(Comparator.comparing(Integer::valueOf)).orElse(0));
+//        List<Integer> inputList1 = Arrays.asList(5, 13, 4, 21, 13, 27, 2, 59, 59, 34);
+//        System.out.println(inputList1.stream().filter(e -> Collections.frequency(inputList1, e) > 1).collect(Collectors.toSet()));
+//
+//        // Question 2
+//        List<Integer> inputList2 = Arrays.asList(4,5,7,8,99,100,101,33,32,4,4);
+//        System.out.println(inputList2.stream().distinct().collect(Collectors.toList()));
+//
+//        // Question 3
+//        List<Integer> inputList3 = Arrays.asList(3,90,350,5);
+//        System.out.println(inputList3.stream().max(Comparator.comparing(Integer::valueOf)).orElse(0));
+//
+//        // Question 4
+//        List<Integer> inputList4 = Arrays.asList(6, 8, 3, 5, 1, 9);
+//        System.out.println(inputList4.stream().max(Comparator.comparing(Integer::valueOf)).orElse(0));
+//        System.out.println(inputList4.stream().min(Comparator.comparing(Integer::valueOf)).orElse(0));
 
         // Question 5
         List<Employee> empList = new ArrayList<>();
@@ -34,12 +37,30 @@ public class Main {
         empList.add(new Employee(266, "Sanvi Pandey", 26, "Female", "Product Development", 2015, 28900.0));
         empList.add(new Employee(277, "Anuj", 31, "Male", "Product Development", 2012, 35700.0));
 
-        Map<String, List<Employee>> empMap = empList.stream().collect(Collectors.groupingBy(Employee::getDepartment));
-        System.out.println(empMap);
-        Map<String, Long> countMap = empList.stream().collect(Collectors.groupingBy(
-                Employee::getDepartment,
-                Collectors.counting()
-        ));
-        System.out.println(countMap);
+//        Map<String, List<Employee>> empMap = empList.stream().collect(Collectors.groupingBy(Employee::getDepartment));
+//        System.out.println(empMap);
+//        Map<String, Long> countMap = empList.stream().collect(Collectors.groupingBy(
+//                Employee::getDepartment,
+//                Collectors.counting()
+//        ));
+//        System.out.println(countMap);
+
+        // Some extra practice...
+//        Consumer<String> upperConsumer = s -> System.out.println(s.substring(0,3).toUpperCase());
+//        Predicate<Employee> under30 = e -> e.age < 30;
+//        BiConsumer<String, String> consoleBC= (a, b) -> System.out.println(a + " | " + b);
+//
+//        //Oldest employee?
+//        Optional<Employee> result = empList.stream().max(Comparator.comparing(employee -> employee.age));
+//        System.out.println(result);
+
+        // Highest earning product dev?
+        Consumer<Employee> formatC = e -> System.out.println(e.name + " | " + e.department + " | "+ e.salary );
+        Predicate<Employee> productDev = e -> e.department == "Product Development";
+
+
+        formatC.accept(empList.stream().filter(e -> productDev.test(e))
+                .collect(Collectors.toList()).stream().max(Comparator.comparing(s -> s.salary)).orElse(null));
+
     }
 }
