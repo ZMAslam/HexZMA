@@ -11,7 +11,7 @@
 	<groupId>com.hexaware.ZA</groupId>
 	<artifactId>CA2</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>CA2</name>
+	<name>JPA1</name>
 	<description>JPA / Spring Boot Assessment</description>
 	<properties>
 		<java.version>11</java.version>
