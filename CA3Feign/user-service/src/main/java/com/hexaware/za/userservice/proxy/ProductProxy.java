@@ -7,10 +7,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
-@FeignClient(name="product-service", url="localhost:8080")
+@FeignClient(name="product-service", url="http://localhost:8080")
 public interface ProductProxy {
     @GetMapping("/products")
-    public List<Product> findAll();
+    public List<Product> findAllProducts();
 
     @GetMapping("/products/{id}")
     public Product findById(@PathVariable long id);
